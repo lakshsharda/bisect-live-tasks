@@ -34,3 +34,9 @@ class TaskList:
 
     def pending(self) -> list[Task]:
         return sorted((t for t in self._tasks if not t.done), key=lambda t: sort_key(t.priority, t.due_day))
+
+    def overdue(self, today: int) -> list[Task]:
+        return [t for t in self.pending() if days_until(today, t.due_day) < 0]
+
+    def due_today(self, today: int) -> list[Task]:
+        return [t for t in self.pending() if days_until(today, t.due_day) == 0]
