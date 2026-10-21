@@ -20,3 +20,10 @@ def test_summary_when_everything_is_ahead():
 
 def test_summary_when_everything_is_late():
     assert summary(make(), 20) == "3 pending, 3 overdue, 0 due today"
+
+
+def test_agenda_lines():
+    assert make().__class__ is TaskList
+    from taskkit.reports import agenda
+
+    assert agenda(make(), 5) == ["pay rent: 2 day(s) overdue", "water plants: due today", "read book: due in 4 day(s)"]
