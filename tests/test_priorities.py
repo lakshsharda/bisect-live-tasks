@@ -22,3 +22,9 @@ def test_more_urgent_sorts_first():
 
 def test_same_priority_sorts_by_due_day():
     assert sort_key("high", 2) < sort_key("high", 5)
+
+
+def test_label():
+    from taskkit.priorities import label
+
+    assert label("urgent") == "Urgent"

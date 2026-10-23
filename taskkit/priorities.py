@@ -13,3 +13,7 @@ def level(name: str) -> int:
 def sort_key(priority: str, due_day: int) -> tuple[int, int]:
     """Most urgent first, then the earliest due day."""
     return (-level(priority), due_day)
+
+
+def label(priority: str) -> str:
+    return priority.capitalize()
