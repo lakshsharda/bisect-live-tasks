@@ -40,3 +40,6 @@ class TaskList:
 
     def due_today(self, today: int) -> list[Task]:
         return [t for t in self.pending() if days_until(today, t.due_day) == 0]
+
+    def titles(self) -> list[str]:
+        return [t.title for t in self.pending()]

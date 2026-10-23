@@ -61,3 +61,7 @@ def test_completed_tasks_are_never_overdue():
     tl = make()
     tl.complete("pay rent")
     assert [t.title for t in tl.overdue(6)] == ["water plants"]
+
+
+def test_titles_follow_the_pending_order():
+    assert make().titles() == ["pay rent", "water plants", "read book"]
