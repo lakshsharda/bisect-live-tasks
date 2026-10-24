@@ -1,7 +1,7 @@
 """Tasks and the task list."""
 from dataclasses import dataclass
 
-from .dates import days_until
+from .dates import days_until, format_relative
 from .priorities import level, sort_key
 
 
@@ -37,7 +37,7 @@ class TaskList:
         return sorted((t for t in self._tasks if not t.done), key=lambda t: sort_key(t.priority, t.due_day))
 
     def overdue(self, today: int) -> list[Task]:
-        return [t for t in self.pending() if days_until(today, t.due_day) < 0]
+        return [t for t in self.pending() if days_until(t.due_day, today) < 0]
 
     def due_today(self, today: int) -> list[Task]:
         return [t for t in self.pending() if days_until(today, t.due_day) == 0]
@@ -48,3 +48,8 @@ class TaskList:
 
 def is_high_priority(task: Task) -> bool:
     return level(task.priority) >= level("high")
+
+
+def reminder_text(task: Task, today: int) -> str:
+    """One-line reminder, e.g. 'pay rent: due in 3 day(s)'."""
+    return f"{task.title}: {format_relative(days_until(today, task.due_day))}"
