@@ -71,3 +71,10 @@ def test_is_high_priority():
     from taskkit.tasks import is_high_priority
 
     assert is_high_priority(Task("a", 1, "urgent")) and not is_high_priority(Task("b", 1))
+
+
+def test_sorting_ties_keep_the_earlier_due_day_first():
+    tl = TaskList()
+    tl.add(Task("b", 7, "high"))
+    tl.add(Task("a", 2, "high"))
+    assert tl.titles() == ["a", "b"]
