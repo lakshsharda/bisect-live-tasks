@@ -65,3 +65,9 @@ def test_completed_tasks_are_never_overdue():
 
 def test_titles_follow_the_pending_order():
     assert make().titles() == ["pay rent", "water plants", "read book"]
+
+
+def test_is_high_priority():
+    from taskkit.tasks import is_high_priority
+
+    assert is_high_priority(Task("a", 1, "urgent")) and not is_high_priority(Task("b", 1))

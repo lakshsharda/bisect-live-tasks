@@ -7,6 +7,7 @@ from .priorities import level, sort_key
 
 @dataclass
 class Task:
+    # Priorities are checked when a task is added to a list.
     title: str
     due_day: int
     priority: str = "normal"
@@ -43,3 +44,7 @@ class TaskList:
 
     def titles(self) -> list[str]:
         return [t.title for t in self.pending()]
+
+
+def is_high_priority(task: Task) -> bool:
+    return level(task.priority) >= level("high")
