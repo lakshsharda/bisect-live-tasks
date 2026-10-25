@@ -9,3 +9,7 @@ def summary(tasks: TaskList, today: int) -> str:
 
 def agenda(tasks: TaskList, today: int) -> list[str]:
     return [f"{t.title}: {format_relative(days_until(today, t.due_day))}" for t in tasks.pending()]
+
+
+def completed_line(done: int, total: int) -> str:
+    return f"{done} of {total} done"

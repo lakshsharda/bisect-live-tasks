@@ -27,3 +27,9 @@ def test_agenda_lines():
     from taskkit.reports import agenda
 
     assert agenda(make(), 5) == ["pay rent: 2 day(s) overdue", "water plants: due today", "read book: due in 4 day(s)"]
+
+
+def test_completed_line():
+    from taskkit.reports import completed_line
+
+    assert completed_line(2, 5) == "2 of 5 done"
